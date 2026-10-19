@@ -27,14 +27,16 @@ class NewTaskPage:
         )
 
     def create_task(self, title, priority, due_date, hours):
-        # TODO: find each input by its locator above and call send_keys
-        # TODO: click the create button
-        pass
+        self.driver.find_element(*self.TITLE_INPUT).send_keys(title)
+        self.driver.find_element(*self.PRIORITY_INPUT).send_keys(priority)
+        self.driver.find_element(*self.DUE_DATE_INPUT).send_keys(due_date)
+        self.driver.find_element(*self.HOURS_INPUT).send_keys(hours)
+        self.driver.find_element(*self.CREATE_BUTTON).click()
 
     def wait_for_success(self):
-        # TODO: use WebDriverWait with expected_conditions to wait for
-        # SUCCESS_BANNER to become visible. Do not use time.sleep.
-        pass
+        return WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(self.SUCCESS_BANNER)
+        )
 
 
 class TaskListPage:
@@ -59,13 +61,12 @@ class TaskListPage:
         )
 
     def mark_complete(self, task_id):
-        # TODO: find the complete_button(task_id) locator and click it.
-        # This triggers a JavaScript call that takes about 0.7 seconds
-        # to finish. Do NOT use time.sleep(1) to wait for it.
-        pass
+        button = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable(self.complete_button(task_id))
+        )
+        button.click()
 
     def wait_until_completed(self, task_id):
-        # TODO: use WebDriverWait with
-        # expected_conditions.text_to_be_present_in_element to wait
-        # until status_cell(task_id) contains the text "Completed".
-        pass
+        return WebDriverWait(self.driver, 10).until(
+            EC.text_to_be_present_in_element(self.status_cell(task_id), "Completed")
+        )
