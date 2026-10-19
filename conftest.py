@@ -40,6 +40,10 @@ def base_url():
     return BASE_URL
 
 
+def pytest_html_report_title(report):
+    report.title = "STQA Lab 5: Web UI Automation Report"
+
+
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     outcome = yield
@@ -53,12 +57,14 @@ def pytest_runtest_makereport(item, call):
     os.makedirs(screenshots_dir, exist_ok=True)
     file_name = f"{screenshots_dir}/{item.name}.png"
     driver.save_screenshot(file_name)
-    if hasattr(report, "extra"):
-        pass
-    extra = getattr(report, "extra", [])
+
+    extra = getattr(report, "extras", [])
     try:
         from pytest_html import extras
-        extra.append(extras.image(file_name))
-        report.extra = extra
-    except ImportError:
+        import base64
+        with open(file_name, "rb") as f:
+            b64_data = base64.b64encode(f.read()).decode("utf-8")
+        extra.append(extras.image(b64_data, name="Screenshot"))
+        report.extras = extra
+    except Exception:
         pass
