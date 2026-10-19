@@ -1,19 +1,20 @@
-/* STQA Lab 5 - Modern Dark UI Theme for pytest-html (Taste Skill) */
+/* STQA Lab 5 - Refined Production Dark Theme for pytest-html */
 
 :root {
-  --bg-primary: #0b0f19;
-  --bg-surface: #111827;
-  --bg-card: #1f2937;
-  --border-color: #374151;
-  --border-subtle: #1f2937;
-  --text-main: #f9fafb;
-  --text-muted: #9ca3af;
-  --text-dim: #6b7280;
+  --bg-primary: #09090b;
+  --bg-surface: #18181b;
+  --bg-card: #27272a;
+  --border-color: #27272a;
+  --border-subtle: #1e1e24;
+  --text-main: #f4f4f5;
+  --text-muted: #a1a1aa;
+  --text-dim: #71717a;
   --color-passed: #10b981;
   --color-passed-bg: rgba(16, 185, 129, 0.12);
   --color-failed: #ef4444;
   --color-failed-bg: rgba(239, 68, 68, 0.12);
   --color-skipped: #f59e0b;
+  --color-skipped-bg: rgba(245, 158, 11, 0.12);
   --color-accent: #3b82f6;
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", "Helvetica Neue", Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -30,31 +31,19 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Titles & Headers */
+/* Titles & Section Headers (Clean, authoritative typography without AI garnish) */
 h1 {
-  font-size: 1.85rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  letter-spacing: -0.025em;
-  color: #ffffff;
-  margin-bottom: 0.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-h1::before {
-  content: "";
-  display: inline-block;
-  width: 12px;
-  height: 28px;
-  background: linear-gradient(135deg, #10b981, #3b82f6);
-  border-radius: 4px;
+  letter-spacing: -0.03em;
+  color: #fafafa;
+  margin-bottom: 0.35rem;
 }
 
 h2 {
-  font-size: 1.15rem;
+  font-size: 1.125rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   color: var(--text-main);
   margin-top: 2rem;
   margin-bottom: 0.75rem;
@@ -77,16 +66,24 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Environment Info Table */
+/* Environment Info Table (Fixed WCAG AA contrast breakdown) */
 #environment {
   border-collapse: separate;
   border-spacing: 0;
   border: 1px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: 8px;
   background-color: var(--bg-surface);
   overflow: hidden;
   width: 100%;
   margin-bottom: 1.5rem;
+}
+
+#environment tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.015) !important;
+}
+
+#environment tr:nth-child(even) {
+  background-color: transparent !important;
 }
 
 #environment td {
@@ -94,7 +91,7 @@ a:hover {
   border-bottom: 1px solid var(--border-subtle);
   border-right: 1px solid var(--border-subtle);
   color: var(--text-muted);
-  font-size: 0.875rem;
+  font-size: 0.85rem;
 }
 
 #environment tr:last-child td {
@@ -104,11 +101,11 @@ a:hover {
 #environment tr td:first-child {
   font-weight: 600;
   color: var(--text-main);
-  background-color: rgba(255, 255, 255, 0.02);
-  width: 160px;
+  background-color: rgba(255, 255, 255, 0.03);
+  width: 180px;
 }
 
-/* Summary Checkbox Bar */
+/* Summary & Filter Bar */
 .filter {
   background-color: var(--bg-surface);
   border: 1px solid var(--border-color);
@@ -121,44 +118,28 @@ a:hover {
   flex-wrap: wrap;
 }
 
-/* Status Badges */
-span.passed,
-.passed .col-result {
+/* Harmonized Status Indicators */
+span.passed {
   color: var(--color-passed) !important;
   font-weight: 600;
 }
 
-.passed .col-result {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.25rem 0.65rem;
-  background-color: var(--color-passed-bg);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  border-radius: 9999px;
-  font-size: 0.8rem;
-  width: auto !important;
-  margin: 0.5rem 0;
-}
-
-.failed .col-result {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.25rem 0.65rem;
-  background-color: var(--color-failed-bg);
-  border: 1px solid rgba(239, 68, 68, 0.25);
-  border-radius: 9999px;
+span.failed, span.error {
   color: var(--color-failed) !important;
   font-weight: 600;
-  font-size: 0.8rem;
-  width: auto !important;
 }
 
-/* Results Table */
+span.skipped, span.xfailed {
+  color: var(--color-skipped) !important;
+  font-weight: 600;
+}
+
+/* Results Table (Strict table-cell semantics preserved) */
 #results-table {
   border-collapse: separate;
   border-spacing: 0;
   border: 1px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: 8px;
   background-color: var(--bg-surface);
   overflow: hidden;
   width: 100%;
@@ -166,21 +147,21 @@ span.passed,
 }
 
 #results-table th {
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: rgba(255, 255, 255, 0.02);
   color: var(--text-main);
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0.85rem 1rem;
+  letter-spacing: 0.06em;
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--border-color);
 }
 
 #results-table td {
-  padding: 0.85rem 1rem;
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--border-subtle);
   color: var(--text-muted);
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   vertical-align: middle;
 }
 
@@ -188,49 +169,105 @@ span.passed,
   background-color: rgba(255, 255, 255, 0.02);
 }
 
+/* Semantic Result Cell with Status Dot */
+#results-table td.col-result {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  width: 130px;
+}
+
+.passed .col-result {
+  color: var(--color-passed) !important;
+}
+
+.passed .col-result::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-passed);
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.35);
+}
+
+.failed .col-result {
+  color: var(--color-failed) !important;
+}
+
+.failed .col-result::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-failed);
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.35);
+}
+
+.skipped .col-result {
+  color: var(--color-skipped) !important;
+}
+
+.skipped .col-result::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-skipped);
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
 .col-testId {
   font-family: var(--font-mono);
-  font-size: 0.85rem !important;
-  color: #e5e7eb !important;
+  font-size: 0.8125rem !important;
+  color: #e4e4e7 !important;
   font-weight: 500;
 }
 
 .col-duration {
   font-family: var(--font-mono);
-  font-size: 0.8rem !important;
+  font-size: 0.775rem !important;
   color: var(--text-dim) !important;
 }
 
-/* Extra Details & Screenshots Container */
+/* Extra Details & Screenshot Section */
 .extra {
   background-color: var(--bg-primary) !important;
 }
 
 .extra-container {
-  padding: 1.5rem !important;
+  padding: 1.25rem !important;
   background: var(--bg-primary);
-  border-radius: 8px;
+  border-radius: 6px;
   margin: 0.5rem 0;
 }
 
-/* Media / Screenshot Styling */
+/* Media / Screenshot Container (Native Grid Preserved) */
 div.media {
   float: none !important;
   width: 100% !important;
-  max-width: 900px !important;
+  max-width: 960px !important;
   height: auto !important;
-  margin: 1rem 0 !important;
+  margin: 0.75rem 0 !important;
   border: 1px solid var(--border-color) !important;
-  border-radius: 10px !important;
+  border-radius: 8px !important;
   overflow: hidden !important;
-  background-color: #030712 !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6) !important;
+  background-color: #09090b !important;
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5) !important;
 }
 
 .media-container {
   height: auto !important;
-  display: block !important;
-  padding: 0.75rem !important;
+  min-height: 220px;
+  padding: 0.75rem;
 }
 
 .media-container__viewport {
@@ -240,12 +277,29 @@ div.media {
 
 .media-container__viewport img {
   width: 100% !important;
-  max-height: 550px !important;
+  max-height: 560px !important;
   object-fit: contain !important;
-  border-radius: 6px !important;
+  border-radius: 4px !important;
   display: block !important;
   margin: 0 auto !important;
-  background-color: #030712 !important;
+  background-color: #09090b !important;
+}
+
+.media-container__nav--left,
+.media-container__nav--right {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted) !important;
+  font-size: 1.25rem !important;
+  cursor: pointer !important;
+  user-select: none;
+  transition: color 0.15s ease;
+}
+
+.media-container__nav--left:hover,
+.media-container__nav--right:hover {
+  color: var(--text-main) !important;
 }
 
 .media__name {
@@ -253,17 +307,36 @@ div.media {
   font-family: var(--font-mono) !important;
   font-size: 0.75rem !important;
   padding: 0.5rem 0.75rem !important;
-  background: rgba(255, 255, 255, 0.03) !important;
+  background: rgba(255, 255, 255, 0.02) !important;
   border-bottom: 1px solid var(--border-color) !important;
 }
 
-/* Log Box */
+/* Collapsible Log Wrapper & Expander Button Fix */
 .logwrapper {
-  background-color: #030712 !important;
+  background-color: #09090b !important;
   border: 1px solid var(--border-color) !important;
-  border-radius: 8px !important;
+  border-radius: 6px !important;
   color: #94a3b8 !important;
   margin-top: 1rem !important;
+  padding: 0.75rem !important;
+}
+
+.logwrapper .logexpander {
+  background-color: #27272a !important;
+  color: #d4d4d8 !important;
+  border: 1px solid #3f3f46 !important;
+  border-radius: 4px !important;
+  padding: 0.25rem 0.5rem !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.75rem !important;
+  cursor: pointer !important;
+  transition: background-color 0.15s ease, color 0.15s ease !important;
+}
+
+.logwrapper .logexpander:hover {
+  background-color: #3f3f46 !important;
+  color: #ffffff !important;
+  border-color: #52525b !important;
 }
 
 .logwrapper .log {
@@ -272,6 +345,7 @@ div.media {
   color: #94a3b8 !important;
   font-family: var(--font-mono) !important;
   font-size: 0.8rem !important;
+  line-height: 1.4 !important;
 }
 
 /* Controls */
